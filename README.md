@@ -1,97 +1,133 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+#  React Native ECOMAPP
 
-# Getting Started
+A full-featured eCommerce mobile application built using **React Native CLI**.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+---
 
-## Step 1: Start Metro
+## Features
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+-  Login / Signup using email + password (with AsyncStorage)
+-  Email validation using regex
+-  Profile screen (view stored email and username)
+-  Product listing from Fake Store API
+-  Search products by title
+-  Product detail screen
+-  Add to Cart (with quantity controls)
+-  Checkout screen
+-  Logout with confirmation
+-  Local session/token management
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+---
 
-```sh
-# Using npm
-npm start
+##  Tech Stack & Packages
 
-# OR using Yarn
-yarn start
-```
+| Tool/Library                            | Purpose                                 |
+|----------------------------------------|-----------------------------------------|
+| React Native CLI                       | Core framework                          |
+| @react-navigation/native               | Navigation stack                        |
+| @react-navigation/native-stack         | Stack navigation                        |
+| react-native-vector-icons              | Icons (MaterialCommunityIcons)          |
+| @react-native-async-storage/async-storage | Persistent login storage             |
+| Fake Store API                         | Product API (https://fakestoreapi.com)  |
 
-## Step 2: Build and run your app
+---
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+##  Folder Structure
 
-### Android
+root/
+├── android/
+├── ios/
+├── src/
+│ ├── api/
+│ │ └── productService.js
+│ ├── screens/
+│ │ ├── LoginScreen.js
+│ │ ├── SignupScreen.js
+│ │ ├── HomeScreen.js
+│ │ ├── ProductDetailScreen.js
+│ │ ├── CartScreen.js
+│ │ ├── CheckoutScreen.js
+│ │
+│ └── navigation/
+│ └── AppNavigator.js
+├── App.js
+└── README.md
 
-```sh
-# Using npm
-npm run android
+# Install Dependencies-
+npm install
+# or
+yarn install
 
-# OR using Yarn
-yarn android
-```
 
-### iOS
+# Run the app:
+npx react-native run-android
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+# API Used:
+Fake Store API
+All Products: https://fakestoreapi.com/products
+Single Product: https://fakestoreapi.com/products/:id
+No API key or auth needed. It returns JSON responses with product id, title, price, image, etc.
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
 
-```sh
-bundle install
-```
+# Authentication
+Users can Signup and their credentials are stored in AsyncStorage.
+On Login, those credentials are matched.
+If valid, a userToken is stored and user is navigated to Home.
+Users can view Profile info (email + username).
+Email is validated using a regex (/^[^\s@]+@[^\s@]+\.[^\s@]+$/).
 
-Then, and every time you update your native dependencies, run:
 
-```sh
-bundle exec pod install
-```
+#Cart and Checkout:
+Users can add products to cart from the product detail screen.
+Cart supports quantity adjustment.
+Checkout button clears the cart and shows a confirmation.
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+# Navigation Structure
+Uses @react-navigation/native-stack for screen transitions.
+All screens are registered in a central file: AppNavigator.js.
+Login/Signup/Logout logic is decoupled from navigation using conditional flows (navigation.replace('Home'), etc.).
 
-```sh
-# Using npm
-npm run ios
 
-# OR using Yarn
-yarn ios
-```
+# Design Decisions:
+AsyncStorage for Authentication:
+Chosen for simplicity (no backend).
+Used to:
+Store user credentials (on Signup)
+Validate credentials on Login
+Store userToken to simulate login persistence
+Fetch data on Profile screen
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+# Stateless API Calls:
+The app uses https://fakestoreapi.com, which doesn’t require auth tokens.
+fetchProducts() and fetchProductById() abstract API logic.
 
-## Step 3: Modify your app
+# Simple State Management:
+Redux was used to keep the app lightweight.State is handled locally via useState and useEffect.
 
-Now that you have successfully run the app, let's make changes!
+# UI/UX Considerations:
+Minimal, clean design using native components (TextInput, FlatList, etc.)
+Vector icons from react-native-vector-icons enhance UI
+Reusable card design for products
+Header icons for profile, logout, and cart improve navigation
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+# Performance Choices
+Image rendering is optimized using proper dimensions and resizeMode.
+useLayoutEffect is used to update navigation headers dynamically.
+FlatList is used for efficient list rendering.
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+ 
+#Logout:
+On logout (power icon), the following is cleared:
+userToken
+userCredentials
+App navigates back to Login.
 
-## Congratulations! :tada:
 
-You've successfully run and modified your React Native App. :partying_face:
+#Building APK:
+cd android
+gradlew assembleRelease
 
-### Now what?
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
 
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
