@@ -25,7 +25,7 @@ A full-featured eCommerce mobile application built using **React Native CLI**.
 | @react-navigation/native               | Navigation stack                        |
 | @react-navigation/native-stack         | Stack navigation                        |
 | react-native-vector-icons              | Icons (MaterialCommunityIcons)          |
-| @react-native-async-storage/async-storage | Persistent login storage             |
+| @Persistent login storage             |
 | Fake Store API                         | Product API (https://fakestoreapi.com)  |
 
 ---
@@ -110,6 +110,7 @@ FlatList is used for efficient list rendering.
 #Building APK:
 cd android
 gradlew assembleRelease
+
 
 
 
