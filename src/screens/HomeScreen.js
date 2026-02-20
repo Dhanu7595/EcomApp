@@ -21,16 +21,15 @@ export default function HomeScreen({ navigation }) {
   const [debouncedSearch, setDebouncedSearch] = useState('');
   const [cachedSearch, setCachedSearch] = useState('');
 
-  // ✅ Get cart items from Redux
+ 
   const cartItems = useSelector((state) => state.cart.cartItems);
 
-  // ✅ Calculate total quantity
   const cartCount = cartItems.reduce(
     (total, item) => total + item.quantity,
     0
   );
 
-  // Fetch Products
+
   useEffect(() => {
     fetchProducts().then(setProducts);
 
@@ -53,7 +52,7 @@ export default function HomeScreen({ navigation }) {
     return () => backHandler.remove();
   }, []);
 
-  // ✅ Debounce Search (2 seconds)
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearch(search);
@@ -68,7 +67,6 @@ export default function HomeScreen({ navigation }) {
     }, [cachedSearch])
   );
 
-  // ✅ Header with Cart Count
   useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
