@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+///import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SplashScreen = ({ navigation }) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -12,18 +12,24 @@ const SplashScreen = ({ navigation }) => {
       useNativeDriver: true,
     }).start();
 
-    const timeout = setTimeout(async () => {
-      try {
-        const userToken = await AsyncStorage.getItem('userToken');
-        if (userToken) {
-          navigation.replace('Home');
-        } else {
-          navigation.replace('Login');
-        }
-      } catch (e) {
-        navigation.replace('Login');
-      }
-    }, 3000);
+
+const timeout =setTimeout(() => {
+   navigation.replace('Home');
+}, 3000);
+   
+
+    // const timeout = setTimeout(async () => {
+    //   try {
+    //     const userToken = await AsyncStorage.getItem('userToken');
+    //     if (userToken) {
+    //       navigation.replace('Home');
+    //     } else {
+    //       navigation.replace('Login');
+    //     }
+    //   } catch (e) {
+    //     navigation.replace('Login');
+    //   }
+    // }, 3000);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -31,7 +37,7 @@ const SplashScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Animated.Text style={[styles.text, { opacity: fadeAnim }]}>
-        ECOM
+        ECOM APP
       </Animated.Text>
     </View>
   );

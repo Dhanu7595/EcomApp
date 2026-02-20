@@ -21,14 +21,14 @@ export default function ProductDetailScreen({ route,navigation }) {
       <Text style={styles.title}>{product.title}</Text>
       <Text>₹{product.price}</Text>
       <View style={styles.ReviewText}>
-      <Text>{product.description}</Text>
-      <Text>Rating: {product.rating.rate} ({product.rating.count} reviews)</Text>
+     
+    
       </View>
       <Button
         title="Add to Cart"
         onPress={() => {
           dispatch(addToCart(product));
-          Alert.alert('Success', 'Item added to cart!');
+          Alert.alert('Success', 'Your Item is added to cart!');
            navigation.navigate('Home', { clearSearch: true });
         }}
         

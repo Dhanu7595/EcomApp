@@ -10,7 +10,7 @@ export default function CartScreen({ navigation }) {
   if (cartItems.length === 0) {
     return (
       <View style={styles.emptyContainer}>
-        <Text style={styles.emptyText}>Your cart is empty.</Text>
+        <Text style={styles.emptyText}>Your cart is empty ".</Text>
         <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
       </View>
     );
@@ -55,5 +55,5 @@ const styles = StyleSheet.create({
   total: { fontWeight: 'bold', fontSize: 16, marginTop: 10 },
   emptyContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   emptyText: { fontSize: 18, marginBottom: 20 },
-  Button:{margin:10}
+  Button:{margin:10,}
 });
