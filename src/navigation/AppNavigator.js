@@ -9,7 +9,6 @@ import SignupScreen from '../screens/SignupScreen';
 import SplashScreen from '../screens/SplashScreen';
 
 
-
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigator() {
