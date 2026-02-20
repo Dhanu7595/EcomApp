@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react';  
 import { View, Text, Button, StyleSheet, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearCart } from '../redux/cartSlice';
